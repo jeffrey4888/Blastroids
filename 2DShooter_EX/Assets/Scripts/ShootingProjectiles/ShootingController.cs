@@ -38,6 +38,8 @@ public class ShootingController : MonoBehaviour
 
     // The last time this component was fired
     private float lastFired = Mathf.NegativeInfinity;
+    private float lastFiredShield = Mathf.NegativeInfinity;
+    private float lastFiredBomb = Mathf.NegativeInfinity;
 
     [Tooltip("The amount of time between shots for On/Off toggles. Only affects enemies with the Delayed modifier.")]
     public float waitTime = 3f;
@@ -169,7 +171,7 @@ public class ShootingController : MonoBehaviour
             }
             lastFired = Time.timeSinceLevelLoad;
         }
-        if (weaponID == 1 && (Time.timeSinceLevelLoad - lastFired) > fireRateShield) // Bash Shield
+        if (weaponID == 1 && (Time.timeSinceLevelLoad - lastFiredShield) > fireRateShield) // Bash Shield
         {
             if (!shieldSummoned)
             {
@@ -179,9 +181,9 @@ public class ShootingController : MonoBehaviour
                     Instantiate(fireEffectShield, transform.position, transform.rotation, null);
                 }
             }
-            lastFired = Time.timeSinceLevelLoad;
+            lastFiredShield = Time.timeSinceLevelLoad;
         }
-        if (weaponID == 2 && (Time.timeSinceLevelLoad - lastFired) > fireRateBomb) // Bomb
+        if (weaponID == 2 && (Time.timeSinceLevelLoad - lastFiredBomb) > fireRateBomb) // Bomb
         {
             if (!bombSummoned)
             {
@@ -191,7 +193,7 @@ public class ShootingController : MonoBehaviour
                     Instantiate(fireEffectBomb, transform.position, transform.rotation, null);
                 }
             }
-            lastFired = Time.timeSinceLevelLoad;
+            lastFiredBomb = Time.timeSinceLevelLoad;
         }
     }
 
