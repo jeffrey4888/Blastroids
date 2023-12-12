@@ -38,8 +38,6 @@ public class ShootingController : MonoBehaviour
 
     // The last time this component was fired
     private float lastFired = Mathf.NegativeInfinity;
-    private float lastFiredShield = Mathf.NegativeInfinity;
-    private float lastFiredBomb = Mathf.NegativeInfinity;
 
     [Tooltip("The amount of time between shots for On/Off toggles. Only affects enemies with the Delayed modifier.")]
     public float waitTime = 3f;
@@ -61,6 +59,9 @@ public class ShootingController : MonoBehaviour
     private bool shieldSummoned;
     private bool bombSummoned;
     public bool isExplosiveRock = false;
+
+    private float lastFiredShield = Mathf.NegativeInfinity;
+    private float lastFiredBomb = Mathf.NegativeInfinity;
 
     /// <summary>
     /// Description:

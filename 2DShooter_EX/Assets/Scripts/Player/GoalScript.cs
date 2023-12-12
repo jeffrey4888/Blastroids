@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GoalScript : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class GoalScript : MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.GetInt("ToggleValue4") == 1)
+        if (PlayerPrefs.GetInt("ToggleValue4") == 1 || SceneManager.GetActiveScene().name == "Level2")
         {
             lockedGate.SetActive(true);
         }
@@ -17,6 +18,8 @@ public class GoalScript : MonoBehaviour
         {
             lockedGate.SetActive(false);
         }
+
+        
     }
 
     private void Update()
@@ -27,6 +30,14 @@ public class GoalScript : MonoBehaviour
             {
                 lockedGate.SetActive(false);
             }
+        }
+        if (SceneManager.GetActiveScene().name == "Level2" && GM.GetComponent<GameManager>().KeysTextObject != null && GM.GetComponent<GameManager>().Keys < 4)
+        {
+            lockedGate.SetActive(true);
+        }
+        else
+        {
+            lockedGate.SetActive(false);
         }
     }
 
