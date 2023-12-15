@@ -65,6 +65,10 @@ public class GameManager : MonoBehaviour
     public Text EnemiesRemainingText;
     public GameObject EnemiesRemainingTextObject;
 
+    public GameObject KeysTextObject;
+    public Text KeysRemainingText;
+    public int Keys;
+
     // Static getter/setter for player score (for convenience)
     public static int score
     {
@@ -272,22 +276,39 @@ public class GameManager : MonoBehaviour
     {
         if (scene.name != "MainMenu")
         {
-            if (PlayerPrefs.GetInt("ToggleValue4") == 1)
+            if (EnemiesRemainingTextObject != null)
             {
-                int enemiesRemaining;
-                EnemiesRemainingTextObject.SetActive(true);
-                enemiesRemaining = enemiesToDefeat - enemiesDefeated;
-                EnemiesRemainingText.text = "Enemies Required: " + enemiesRemaining;
-                if (enemiesRemaining <= 0)
+                if (PlayerPrefs.GetInt("ToggleValue4") == 1)
                 {
-                    EnemiesRemainingText.text = "Exit Is Open!";
+
+                    int enemiesRemaining;
+                    EnemiesRemainingTextObject.SetActive(true);
+                    enemiesRemaining = enemiesToDefeat - enemiesDefeated;
+                    EnemiesRemainingText.text = "Enemies Required: " + enemiesRemaining;
+                    if (enemiesRemaining <= 0)
+                    {
+                        EnemiesRemainingText.text = "Exit Is Open!";
+                    }
+
+                }
+                else
+                {
+                    EnemiesRemainingTextObject.SetActive(false);
                 }
             }
-            else
+            
+        }
+           if (KeysTextObject != null)
+        {
+            int TotalKeys = 4;
+            KeysTextObject.SetActive(true);
+            KeysRemainingText.text = "Keys Required: " + (TotalKeys - Keys);
+            if (Keys >= 4)
             {
-                EnemiesRemainingTextObject.SetActive(false);
+                KeysRemainingText.text = "Exit Is Open!";
             }
         }
+            
     }
 
     public void ToggleOneStrength(bool isOn)
